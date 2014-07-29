@@ -55,4 +55,34 @@ describe 'PigLatin' do
     end
   end
 
+  context 'when there is a number in the word' do
+    it 'it returns an error symbol' do
+      result = PigLatin.translate("rh87agt")
+      expect(result).to eq(:error)
+    end
+  end
+
+  context 'when there are no vowels' do
+    it 'it returns an error symbol' do
+      result = PigLatin.translate("jhgftr")
+      expect(result).to eq(:error)
+    end
+  end
+
+  context 'when there is a non-letter symbol included' do
+    it 'it returns an error symbol' do
+      result = PigLatin.translate("hgut&h")
+      expect(result).to eq(:error)
+    end
+  end
+
+  context 'when a non-string is passed' do
+    it 'it should return an error symbol for numbers, but convert booleans to strings and translate' do
+      result = PigLatin.translate(901)
+      expect(result).to eq(:error)
+
+      result = PigLatin.translate(true)
+      expect(result).to eq("uetray")
+    end
+  end
 end
